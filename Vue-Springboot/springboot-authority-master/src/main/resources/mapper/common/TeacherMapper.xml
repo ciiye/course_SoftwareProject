@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.temp.common.mapper.TeacherMapper" >
+
+    <resultMap id="BaseResultMap" type="com.temp.common.model.entity.Teacher" >
+        <result column="id" property="id" jdbcType="INTEGER" />
+        <result column="number" property="number" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="job" property="job" jdbcType="VARCHAR" />
+        <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+        <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, number, name, sex, email, job, create_at, update_at
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap" parameterType="com.temp.common.model.entity.Teacher">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM teacher
+        <where>
+            <if test="id != null" >
+                AND id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="number != null" >
+                AND number = #{number,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null" >
+                AND name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="sex != null" >
+                AND sex = #{sex,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null" >
+                AND email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="job != null" >
+                AND job = #{job,jdbcType=VARCHAR}
+            </if>
+            <if test="createAt != null" >
+                AND create_at = #{createAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateAt != null" >
+                AND update_at = #{updateAt,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+        ORDER BY id DESC
+    </select>
+
+    <select id="queryPageList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM teacher
+        <where>
+            <if test="teacher.id != null" >
+                AND id = #{teacher.id,jdbcType=INTEGER}
+            </if>
+            <if test="teacher.number != null" >
+                AND number = #{teacher.number,jdbcType=VARCHAR}
+            </if>
+            <if test="teacher.name != null" >
+                AND name = #{teacher.name,jdbcType=VARCHAR}
+            </if>
+            <if test="teacher.sex != null" >
+                AND sex = #{teacher.sex,jdbcType=VARCHAR}
+            </if>
+            <if test="teacher.email != null" >
+                AND age = #{teacher.email,jdbcType=VARCHAR}
+            </if>
+            <if test="teacher.job != null" >
+                AND grade = #{teacher.job,jdbcType=VARCHAR}
+            </if>
+            <if test="teacher.createAt != null" >
+                AND create_at = #{teacher.createAt,jdbcType=TIMESTAMP}
+        </if>
+            <if test="teacher.updateAt != null" >
+                AND update_at = #{teacher.updateAt,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+        ORDER BY id DESC LIMIT ${(page - 1) * size}, ${size}
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer" parameterType="com.temp.common.model.entity.Teacher">
+        SELECT COUNT(*) FROM teacher
+        <where>
+            <if test="id != null" >
+                AND id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="number != null" >
+                AND number = #{number,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null" >
+                AND name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="sex != null" >
+                AND sex = #{sex,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null" >
+                AND email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="job != null" >
+                AND job = #{job,jdbcType=VARCHAR}
+            </if>
+            <if test="createAt != null" >
+                AND create_at = #{createAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateAt != null" >
+                AND update_at = #{updateAt,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryOne" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM teacher
+        WHERE id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        DELETE FROM teacher
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="add" parameterType="com.temp.common.model.entity.Teacher" >
+        INSERT INTO teacher
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="number != null" >
+                number,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="sex != null" >
+                sex,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="job != null" >
+                job,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="number != null" >
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="job != null" >
+                #{job,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.temp.common.model.entity.Teacher" >
+        update teacher
+        <set>
+            <if test="number != null" >
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="job != null" >
+                job = #{job,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
