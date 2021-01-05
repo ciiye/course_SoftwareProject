@@ -13,7 +13,7 @@
   "author": "zhengwenfang",
   "license": "ISC",
   "dependencies": {
-    "axios": "0.16.2",
+    "axios": "0.21.1",
     "clipboard": "1.7.1",
     "codemirror": "5.26.0",
     "dropzone": "5.1.0",
